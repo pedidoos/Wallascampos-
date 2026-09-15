@@ -1273,6 +1273,30 @@
       .hero-main-player .lyrics-window { height: 38px; }
       .nav { min-height: 62px; }
     }
+
+    /* Ajustes finais: botão do YouTube, rolagem interna e responsividade */
+    .btn-youtube {
+      background: #ff0033;
+      color: #fff;
+      box-shadow: 0 8px 18px rgba(255,0,51,.22);
+    }
+    .btn-youtube:hover { background: #cc0029; }
+    .actions { width: 100%; max-width: 470px; }
+    .actions .btn { flex: 1 1 0; min-width: 0; text-align: center; }
+    .hero-main-player .lyrics-window { overscroll-behavior: contain; }
+    @media (max-width: 760px) {
+      .actions { max-width: 100%; }
+      .actions .btn { padding-left: 10px; padding-right: 10px; }
+      /* Em celulares o conteúdo pode crescer sem ser cortado pela altura da tela. */
+      .hero { height: auto; min-height: 100svh; max-height: none; }
+      .hero-content { height: auto; min-height: calc(100svh - 60px); }
+      .hero-details { flex: 0 0 auto; }
+      .hero-main-player { max-width: 100%; }
+      .now-playing { min-width: 0; }
+    }
+    @media (max-width: 380px) {
+      .actions .btn { font-size: .68rem; padding-left: 4px; padding-right: 4px; }
+    }
   </style>
 </head>
 <body class="show-locked">
@@ -1326,7 +1350,7 @@
         <a class="hero-social" href="#downloads" title="Baixar músicas"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiRIqm9k719LbWHpR51yZrUnz0mc3JwT99qvIdo93I3Ga_f2-YenehPtbx1n5DWqVULN3uaSEOLYpAlbIJEVYDgRiKak1i5oHb5Ck1FLNJyCQo-0gRVjwomSfFlP6GOAnLQYhLsBaaYGVipX3FeIbF-ePYPghJNfKhkPCSJqW215N6-TJqaVsnyPDNu1Tg/s1600/320578.png" alt="Download de músicas" /></a>
         </div>
       </div>
-      <div class="actions"><a class="btn btn-primary" href="#player-principal">▶ Ouvir agora</a><a class="btn btn-dark" href="#shows">Contratar show</a></div>
+      <div class="actions"><a class="btn btn-youtube" href="https://www.youtube.com/watch?v=BfdEe70GGvw" target="_blank" rel="noopener" aria-label="Abrir Wallas Campos no YouTube">▶ YouTube</a><a class="btn btn-dark" href="#shows">Contratar show</a></div>
       <div class="panel player hero-main-player" id="player-principal">
         <div class="player-head">
           <div class="now-playing"><div class="cover">♫</div><div><div class="track-name" id="current-title">Ela Endoidou</div><div class="track-status" id="current-status">Wallas Campos • player oficial</div></div></div>
@@ -1557,7 +1581,9 @@ Se tu não voltar não sei mais o que fazer
       lines.forEach((line, index) => line.classList.toggle('active', index === nextActive));
       if (nextActive !== activeLyric) {
         activeLyric = nextActive;
-        lines[nextActive].scrollIntoView({ block: 'center', behavior: 'smooth' });
+        const line = lines[nextActive];
+        const targetTop = line.offsetTop - (lyricsWindow.clientHeight - line.offsetHeight) / 2;
+        lyricsWindow.scrollTo({ top: Math.max(0, targetTop), behavior: 'smooth' });
       }
     }
     function escapeHtml(value) {

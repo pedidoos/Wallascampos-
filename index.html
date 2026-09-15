@@ -1345,9 +1345,9 @@
     }
     .visualizer::after { background: rgba(126,195,255,.42); box-shadow: 0 0 8px rgba(41,143,255,.55); }
     .visualizer-label { color: rgba(173,215,255,.84); letter-spacing: .11em; text-shadow: 0 1px 5px #000; }
-    .visualizer[data-track="0"] { --visual-main: #7dd7ff; --visual-second: #1b73d1; }
-    .visualizer[data-track="1"] { --visual-main: #d798ff; --visual-second: #3a6dff; }
-    .visualizer[data-track="2"] { --visual-main: #ffe795; --visual-second: #2195e5; }
+    .visualizer[data-track="0"] { --visual-main: #f6d477; --visual-second: #b9782d; }
+    .visualizer[data-track="1"] { --visual-main: #ffe39a; --visual-second: #c78a2c; }
+    .visualizer[data-track="2"] { --visual-main: #f0c65a; --visual-second: #9f6422; }
 
     /* Cliques limpos: sem seleção azul do navegador e com foco elegante */
     button, a, .btn, .track, .hero-social, .splash-social { -webkit-tap-highlight-color: transparent; user-select: none; }
@@ -1382,6 +1382,27 @@
       border-radius: 0;
     }
     .visualizer::before, .visualizer::after, .visualizer-label { display: none; }
+
+    /* Player translúcido para revelar suavemente o vídeo do palco */
+    .hero-main-player {
+      background: rgba(12, 22, 29, .48);
+      border-color: rgba(240, 198, 90, .28);
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
+    }
+    /* Contratação em dourado, com o mesmo tamanho do botão YouTube */
+    .actions .btn-dark {
+      background: var(--gold);
+      border-color: var(--gold-2);
+      color: #10171c;
+      box-shadow: 0 8px 18px rgba(201, 147, 46, .2);
+      text-transform: uppercase;
+    }
+    .actions .btn-dark:hover { background: var(--gold-2); }
+
+    /* Acabamento do player: sem borda e com barras douradas */
+    .hero-main-player { border: 0; }
+    .visualizer { border: 0 !important; }
   </style>
 </head>
 <body class="show-locked">
@@ -1435,7 +1456,7 @@
         <a class="hero-social" href="#downloads" title="Baixar músicas"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiRIqm9k719LbWHpR51yZrUnz0mc3JwT99qvIdo93I3Ga_f2-YenehPtbx1n5DWqVULN3uaSEOLYpAlbIJEVYDgRiKak1i5oHb5Ck1FLNJyCQo-0gRVjwomSfFlP6GOAnLQYhLsBaaYGVipX3FeIbF-ePYPghJNfKhkPCSJqW215N6-TJqaVsnyPDNu1Tg/s1600/320578.png" alt="Download de músicas" /></a>
         </div>
       </div>
-      <div class="actions"><a class="btn btn-youtube" href="https://www.youtube.com/watch?v=BfdEe70GGvw" target="_blank" rel="noopener" aria-label="Abrir Wallas Campos no YouTube">▶ YouTube</a><a class="btn btn-dark" href="#shows">Contratar show</a></div>
+      <div class="actions"><a class="btn btn-youtube" href="https://www.youtube.com/watch?v=BfdEe70GGvw" target="_blank" rel="noopener" aria-label="Abrir Wallas Campos no YouTube">▶ YouTube</a><a class="btn btn-dark" href="#shows">CONTRATAR SHOW</a></div>
       <div class="panel player hero-main-player" id="player-principal">
         <div class="player-head">
           <div class="now-playing"><div class="cover">♫</div><div><div class="track-name" id="current-title">Ela Endoidou</div><div class="track-status" id="current-status">Wallas Campos • player oficial</div></div></div>
@@ -1634,8 +1655,8 @@ Se tu não voltar não sei mais o que fazer
     }
     const visualizerStyles = [
       { label: 'BATIDA QUENTE', speed: 1.00, mode: 'bars' },
-      { label: 'BATIDA DANÇANTE', speed: 1.22, mode: 'wave' },
-      { label: 'BATIDA ROMÂNTICA', speed: .78, mode: 'pulse' }
+      { label: 'BATIDA DANÇANTE', speed: 1.22, mode: 'bars' },
+      { label: 'BATIDA ROMÂNTICA', speed: .78, mode: 'bars' }
     ];
     let visualizerFrame = 0;
     let visualizerWidth = 0;
